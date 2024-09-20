@@ -1,0 +1,334 @@
+<html><head><base href="https://thegloucter.com/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Suite Entry Notice Generator - The Gloucester on Yonge</title><style>
+:root {
+  --primary-color: #0056b3;
+  --secondary-color: #17a2b8;
+  --background-color: #f0f4f8;
+  --text-color: #333;
+  --border-color: #ced4da;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 0.5rem 0 0;
+  font-weight: 300;
+}
+
+main {
+  max-width: 800px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 20px var(--shadow-color);
+}
+
+form {
+  display: grid;
+  gap: 1.2rem;
+}
+
+label {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px rgba(23, 162, 184, 0.2);
+}
+
+.checkbox-group {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.checkbox-group div {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #003d82;
+}
+
+#printButton {
+  background-color: green;
+  color: white;
+}
+
+#printButton:hover {
+  background-color: darkgreen;
+}
+
+#noticePreview {
+  margin-top: 1.5rem;
+}
+
+.notice {
+  background-color: #fff;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 5px dotted black;
+}
+
+.notice:last-child {
+  border-bottom: none;
+}
+
+.notice h2 {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.1rem;
+}
+
+.notice h3 {
+  color: var(--secondary-color);
+  margin-top: 0;
+  margin-bottom: 0.2rem;
+  font-size: 1rem;
+}
+
+.notice p {
+  margin-bottom: 0.2rem;
+  font-size: 0.8rem;
+}
+
+.notice strong {
+  font-size: 0.8rem;
+}
+
+footer {
+  text-align: center;
+  padding: 0.8rem;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.8rem;
+}
+
+@media print {
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body * {
+    visibility: hidden;
+  }
+  #noticePreview, #noticePreview * {
+    visibility: visible;
+  }
+  
+  @page {
+    margin: 10mm;
+  }
+  
+  #noticePreview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .notice-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    box-sizing: border-box;
+  }
+  
+  .notice {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    page-break-inside: avoid;
+  }
+  
+  .notice-1 .notice {
+    width: 100%;
+    height: 100%;
+  }
+  .notice-2 .notice {
+    width: 100%;
+    height: 50%;
+  }
+  .notice-4 .notice {
+    width: 50%;
+    height: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 1rem;
+  }
+  
+  form {
+    gap: 0.8rem;
+  }
+}
+
+.required::after {
+  content: "*";
+  color: red;
+  margin-left: 4px;
+}
+
+.nature-of-visit-lines {
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 0.4rem;
+}
+</style></head><body><header><h1>🏢 The Gloucester on Yonge</h1><h2>Suite Entry Notice Generator</h2></header><main><form id="noticeForm"><label for="suiteNumber">🚪 Suite Number:</label><input type="text" id="suiteNumber" name="suiteNumber" placeholder="Enter suite number"><div class="checkbox-group"><label>👥 Person(s) who entered the suite:</label><div><input type="checkbox" id="security" name="enteredBy" value="Security"><label for="security">Security</label></div><div id="securityGuardDiv" style="display:none;"><select id="securityGuard" name="securityGuard"><option value="">Select Guard</option><option value="Ajaypreet">Ajaypreet</option><option value="Amritpal">Amritpal</option><option value="Meet">Meet</option><option value="Jatin">Jatin</option><option value="Ashwin">Ashwin</option><option value="Arnav">Arnav</option><option value="Jashanpreet">Jashanpreet</option><option value="Manmeet">Manmeet</option><option value="Other">Other</option></select></div><div id="otherGuardDiv" style="display:none;"><input type="text" id="otherGuard" name="otherGuard" placeholder="Enter guard's name"></div><div><input type="checkbox" id="superintendent" name="enteredBy" value="Superintendent"><label for="superintendent">Superintendent</label></div><div><input type="checkbox" id="management" name="enteredBy" value="Management"><label for="management">Management</label></div><div><input type="checkbox" id="construction" name="enteredBy" value="Construction"><label for="construction">Construction</label></div><div><input type="checkbox" id="other" name="enteredBy" value="Other"><label for="other">Other</label></div><div id="otherPersonDiv" style="display:none;"><input type="text" id="otherPerson" name="otherPerson" placeholder="Enter person's name"></div></div><label for="entryDate">📅 Date of Entry:</label><input type="date" id="entryDate" name="entryDate"><label for="entryType" class="required">🔑 Entry Type:</label><select id="entryType" name="entryType" required><option value="">Select Entry Type</option><option value="Resident Permission">Resident Permission</option><option value="Emergency">Emergency</option><option value="Scheduled Maintenance">Scheduled Maintenance</option></select><label for="natureOfVisit">📝 Nature of Visit:</label><textarea id="natureOfVisit" name="natureOfVisit" rows="2" placeholder="Enter nature of visit"></textarea><div class="checkbox-group"><label>⚙️ Additional Actions (Optional)</label><div><input type="checkbox" id="workCompleted" name="additionalActions" value="Work Completed"><label for="workCompleted">Work Completed</label></div><div><input type="checkbox" id="moreWorkRequired" name="additionalActions" value="More Work Required"><label for="moreWorkRequired">More Work Required</label></div><div><input type="checkbox" id="contactManagement" name="additionalActions" value="Contact Property Management ASAP"><label for="contactManagement">Contact Property Management ASAP</label></div></div><div><label for="noticesPerPage">Notices per page:</label><select id="noticesPerPage" name="noticesPerPage"><option value="1">1</option><option value="2">2</option><option value="4">4</option></select></div><button type="button" id="generateButton">🖨️ Generate Notice</button></form><button id="printButton" style="display:none;">Print Notice</button><div id="noticePreview"></div></main><footer>© 2023 The Gloucester on Yonge. All rights reserved.</footer><script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('noticeForm');
+  const generateButton = document.getElementById('generateButton');
+  const printButton = document.getElementById('printButton');
+  const noticePreview = document.getElementById('noticePreview');
+
+  // Dynamic form behavior
+  document.getElementById('security').addEventListener('change', function() {
+    document.getElementById('securityGuardDiv').style.display = this.checked ? 'block' : 'none';
+  });
+
+  document.getElementById('securityGuard').addEventListener('change', function() {
+    document.getElementById('otherGuardDiv').style.display = this.value === 'Other' ? 'block' : 'none';
+  });
+
+  document.getElementById('other').addEventListener('change', function() {
+    document.getElementById('otherPersonDiv').style.display = this.checked ? 'block' : 'none';
+  });
+
+  generateButton.addEventListener('click', function() {
+    const formData = new FormData(form);
+    if (!formData.get('entryType')) {
+      alert('Please select an Entry Type');
+      return;
+    }
+    let noticeHTML = '<div class="notice-container notice-' + formData.get('noticesPerPage') + '">';
+    const noticesPerPage = parseInt(formData.get('noticesPerPage'));
+
+    for (let i = 0; i < noticesPerPage; i++) {
+      noticeHTML += generateNotice(formData);
+    }
+
+    noticeHTML += '</div>';
+    noticePreview.innerHTML = noticeHTML;
+    printButton.style.display = 'block';
+    
+    // Move the print button to the top of the notice preview
+    noticePreview.insertAdjacentElement('beforebegin', printButton);
+  });
+
+  printButton.addEventListener('click', function() {
+    window.print();
+  });
+
+  function generateNotice(formData) {
+    const suiteNumber = formData.get('suiteNumber') || '_________';
+    const entryDate = formData.get('entryDate') || new Date().toLocaleDateString();
+    const entryType = formData.get('entryType');
+    const natureOfVisit = formData.get('natureOfVisit') || '<div class="nature-of-visit-lines">&nbsp;</div><div class="nature-of-visit-lines">&nbsp;</div>';
+
+    let enteredBy = Array.from(formData.getAll('enteredBy')).map(value => {
+      if (value === 'Security') {
+        const guard = formData.get('securityGuard');
+        const guardName = guard === 'Other' ? formData.get('otherGuard') : guard;
+        return guardName + ' (Security)';
+      }
+      if (value === 'Other') {
+        return formData.get('otherPerson');
+      }
+      return value;
+    }).filter(Boolean).join(', ') || '_________';
+
+    let additionalActions = formData.getAll('additionalActions');
+    if (additionalActions.length === 0) {
+      additionalActions = [
+        'Work Completed',
+        'More Work Required',
+        'Contact Property Management ASAP'
+      ];
+    }
+
+    const actionsList = additionalActions.map(action => 
+      `<div><input type="checkbox" ${formData.getAll('additionalActions').includes(action) ? 'checked' : ''}> ${action}</div>`
+    ).join('');
+
+    return `
+      <div class="notice">
+        <h2>SUITE ENTRY NOTICE</h2>
+        <h3>The Gloucester On Yonge</h3>
+        <p><em>Printed: ${new Date().toLocaleString()}</em></p>
+        <p><strong>Suite Number:</strong> ${suiteNumber}</p>
+        <p><strong>Person(s) who entered:</strong> ${enteredBy}</p>
+        <p><strong>Date of Entry:</strong> ${entryDate}</p>
+        <p><strong>Entry Type:</strong> ${entryType}</p>
+        <p><strong>Nature of Visit:</strong> ${natureOfVisit}</p>
+        <div><strong>Additional Actions:</strong>${actionsList}</div>
+      </div>
+    `;
+  }
+});
+</script></body></html>
