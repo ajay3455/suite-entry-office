@@ -166,7 +166,7 @@
         @media print {
             @page {
                 size: A4;
-                margin: 20mm;
+                margin: 10mm;
             }
 
             body * {
@@ -191,12 +191,13 @@
             .notice-content {
                 page-break-inside: avoid;
                 margin: 0;
+                width: 100%;
+                height: auto;
             }
 
             .print-two .notice-content {
-                width: 100%;
-                height: 50%;
-                box-sizing: border-box;
+                height: 50vh;
+                overflow: hidden;
             }
 
             .cut-line {
@@ -209,6 +210,15 @@
 
             .action-buttons {
                 display: none;
+            }
+
+            /* Adjust font sizes for printing */
+            .notice-content h2 {
+                font-size: 22px;
+            }
+
+            .notice-content p {
+                font-size: 16px;
             }
         }
     </style>
@@ -268,7 +278,7 @@
                     <label><input type="checkbox" name="options" value="Please Contact Property Management"> Please Contact Property Management</label>
                 </div>
 
-                <button type="submit">Generate Notice</button>
+                <!-- Removed the "Generate Notice" button since changes are now automatic -->
             </form>
         </div>
 
@@ -338,11 +348,7 @@
             document.getElementById('samplePreview').innerHTML = sampleHtmlContent;
         }
 
-        document.getElementById('noticeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            generateNotice();
-        });
-
+        // Function to generate notice content
         function generateNotice() {
             const suiteNumber = document.getElementById('suiteNumber').value.trim() || '_____';
             const entryDateInput = document.getElementById('entryDate').value;
@@ -405,6 +411,14 @@
 
             document.getElementById('noticePreview').innerHTML = noticeHtmlContent;
         }
+
+        // Automatically update the notice when form inputs change
+        document.getElementById('noticeForm').addEventListener('input', function() {
+            generateNotice();
+        });
+
+        // Generate notice on page load
+        generateNotice();
 
         document.getElementById('printNotice').addEventListener('click', function () {
             preparePrint();
