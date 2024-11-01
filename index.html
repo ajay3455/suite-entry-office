@@ -245,6 +245,12 @@
             .notice-footer {
                 margin-top: 5px;
             }
+
+            /* Fix for unnecessary blank page when printing two notices per page */
+            html, body {
+                height: auto;
+                overflow: auto;
+            }
         }
     </style>
 </head>
@@ -337,25 +343,20 @@
     <div id="noticePrintArea" style="display: none;"></div>
 
     <script>
+        function handleVisibility(element, condition) {
+            element.style.display = condition ? 'block' : 'none';
+        }
+
         document.querySelectorAll('input[name="personEntered"]').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
-                const otherInput = document.getElementById('otherPerson');
-                const securitySelect = document.getElementById('securityGuardSelect');
-
-                otherInput.style.display = document.querySelector('input[name="personEntered"][value="Other"]').checked ? 'block' : 'none';
-
-                securitySelect.style.display = document.querySelector('input[name="personEntered"][value="Security"]').checked ? 'block' : 'none';
+                handleVisibility(document.getElementById('otherPerson'), document.querySelector('input[name="personEntered"][value="Other"]').checked);
+                handleVisibility(document.getElementById('securityGuardSelect'), document.querySelector('input[name="personEntered"][value="Security"]').checked);
             });
         });
 
         // Event listener for security guard selection
         document.getElementById('securityGuardSelect').addEventListener('change', function() {
-            const guardNameInput = document.getElementById('guardNameInput');
-            if (this.value === 'Others') {
-                guardNameInput.style.display = 'block';
-            } else {
-                guardNameInput.style.display = 'none';
-            }
+            handleVisibility(document.getElementById('guardNameInput'), this.value === 'Others');
         });
 
         // Initial sample notice content
@@ -387,8 +388,7 @@
         function generateNotice() {
             const suiteNumber = document.getElementById('suiteNumber').value.trim() || '_____';
             const entryDateInput = document.getElementById('entryDate').value;
-            const entryDate = entryDateInput ? new Date(entryDateInput) : new Date();
-            const formattedEntryDate = entryDate.toLocaleDateString();
+            const formattedEntryDate = entryDateInput ? new Date(entryDateInput).toLocaleDateString() : 'MM/DD/YYYY';
 
             const personsEnteredArray = Array.from(document.querySelectorAll('input[name="personEntered"]:checked'))
                 .map(checkbox => checkbox.value);
