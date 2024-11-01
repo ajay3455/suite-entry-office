@@ -101,7 +101,6 @@
         }
 
         .notice-content, .sample-content {
-            border: 2px solid #000;
             padding: 15px;
             margin: 10px auto;
             text-align: center;
@@ -193,12 +192,14 @@
                 margin: 0;
                 width: 100%;
                 height: auto;
+                border: none;
             }
 
             /* Adjusted margins and font sizes to prevent overflow */
             .print-two .notice-content {
                 margin: 0;
                 padding: 10px;
+                border: none;
             }
 
             .cut-line {
@@ -235,6 +236,7 @@
             .notice-content, .print-two .notice-content {
                 padding: 10px;
                 margin: 0;
+                border: none;
             }
 
             /* Remove any margins that could cause overflow */
@@ -248,8 +250,14 @@
 
             /* Fix for unnecessary blank page when printing two notices per page */
             html, body {
-                height: auto;
-                overflow: auto;
+                height: 100%;
+                overflow: visible;
+            }
+
+            .print-two .notice-content {
+                display: inline-block;
+                width: 49%;
+                vertical-align: top;
             }
         }
     </style>
