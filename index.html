@@ -195,10 +195,10 @@
                 height: auto;
             }
 
-            /* Removed height and overflow to fix blank page issue */
+            /* Adjusted margins and font sizes to prevent overflow */
             .print-two .notice-content {
-                /* height: 50vh;
-                overflow: hidden; */
+                margin: 0;
+                padding: 10px;
             }
 
             .cut-line {
@@ -229,6 +229,21 @@
 
             .print-two .notice-content p {
                 font-size: 14px;
+            }
+
+            /* Reduce margins and paddings */
+            .notice-content, .print-two .notice-content {
+                padding: 10px;
+                margin: 0;
+            }
+
+            /* Remove any margins that could cause overflow */
+            img.logo-img, img.lock-img {
+                margin-bottom: 5px;
+            }
+
+            .notice-footer {
+                margin-top: 5px;
             }
         }
     </style>
@@ -266,7 +281,8 @@
                     <option value="Praveen">Praveen</option>
                     <option value="Jashanpreet">Jashanpreet</option>
                     <option value="Arnav">Arnav</option>
-                    <option value="others">other</option>
+                    <option value="Gurwinder">Gurwinder</option>
+                    <option value="Others">Others</option>
                 </select>
                 <input type="text" id="guardNameInput" placeholder="Enter Guard's Name" style="display: none;">
                 <input type="text" id="otherPerson" placeholder="Specify other" style="display: none;">
@@ -288,8 +304,6 @@
                     <label><input type="checkbox" name="options" value="Work Pending"> Work Pending</label>
                     <label><input type="checkbox" name="options" value="Please Contact Property Management"> Please Contact Property Management</label>
                 </div>
-
-                <!-- Removed the "Generate Notice" button since changes are now automatic -->
             </form>
         </div>
 
@@ -391,7 +405,7 @@
             }
 
             if (personsEnteredArray.includes('Security')) {
-                if (securityGuard === 'NSHOT') {
+                if (securityGuard === 'Others') {
                     const guardName = document.getElementById('guardNameInput').value.trim();
                     if (guardName) {
                         personsEntered.push(`Security (${guardName})`);
@@ -471,7 +485,6 @@
                 noticePrintArea.innerHTML = `
                     <div class="notice-content">${noticeHtmlContent}</div>
                     <div class="notice-content">${noticeHtmlContent}</div>
-                    <div class="cut-line"></div>
                 `;
             }
 
