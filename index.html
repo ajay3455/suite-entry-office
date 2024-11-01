@@ -195,9 +195,10 @@
                 height: auto;
             }
 
+            /* Removed height and overflow to fix blank page issue */
             .print-two .notice-content {
-                height: 50vh;
-                overflow: hidden;
+                /* height: 50vh;
+                overflow: hidden; */
             }
 
             .cut-line {
@@ -219,6 +220,15 @@
 
             .notice-content p {
                 font-size: 16px;
+            }
+
+            /* Adjust font sizes for two notices per page */
+            .print-two .notice-content h2 {
+                font-size: 20px;
+            }
+
+            .print-two .notice-content p {
+                font-size: 14px;
             }
         }
     </style>
@@ -256,8 +266,9 @@
                     <option value="Praveen">Praveen</option>
                     <option value="Jashanpreet">Jashanpreet</option>
                     <option value="Arnav">Arnav</option>
-                    <option value="Gurwinder">Gurwinder</option>
+                    <option value="others">other</option>
                 </select>
+                <input type="text" id="guardNameInput" placeholder="Enter Guard's Name" style="display: none;">
                 <input type="text" id="otherPerson" placeholder="Specify other" style="display: none;">
 
                 <label for="entryPermission">Entry Type:</label>
@@ -323,6 +334,16 @@
             });
         });
 
+        // Event listener for security guard selection
+        document.getElementById('securityGuardSelect').addEventListener('change', function() {
+            const guardNameInput = document.getElementById('guardNameInput');
+            if (this.value === 'Others') {
+                guardNameInput.style.display = 'block';
+            } else {
+                guardNameInput.style.display = 'none';
+            }
+        });
+
         // Initial sample notice content
         let noticeHtmlContent = '';
         let sampleHtmlContent = '';
@@ -368,11 +389,22 @@
             } else if (personsEnteredArray.includes('Other')) {
                 personsEntered.push('____________');
             }
-            if (personsEnteredArray.includes('Security') && securityGuard) {
-                personsEntered.push(`Security (${securityGuard})`);
-            } else if (personsEnteredArray.includes('Security')) {
-                personsEntered.push('Security (____________)');
+
+            if (personsEnteredArray.includes('Security')) {
+                if (securityGuard === 'NSHOT') {
+                    const guardName = document.getElementById('guardNameInput').value.trim();
+                    if (guardName) {
+                        personsEntered.push(`Security (${guardName})`);
+                    } else {
+                        personsEntered.push('Security (____________)');
+                    }
+                } else if (securityGuard) {
+                    personsEntered.push(`Security (${securityGuard})`);
+                } else {
+                    personsEntered.push('Security (____________)');
+                }
             }
+
             personsEnteredArray.forEach(person => {
                 if (person !== 'Other' && person !== 'Security') {
                     personsEntered.push(person);
